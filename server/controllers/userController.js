@@ -34,9 +34,14 @@ exports.login = async (req, res) => {
     }
 
     if (same) {
+      const token = this.createToken(user._id);
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24, // one day
+      });
+
       res.status(200).json({
         succeded: true,
-        token: this.createToken(user._id),
       });
     } else {
       res.status(401).json({
@@ -57,3 +62,7 @@ exports.createToken = (userID) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
+
+exports.getDashboard = (res) => {
+  res.status(200).redirect('/dashboard');
+}

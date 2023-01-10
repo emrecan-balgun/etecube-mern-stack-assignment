@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
 const userRoute = require('./routes/userRoute.js');
@@ -11,6 +12,7 @@ dotenv.config();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Mongoose Config
 mongoose.set('strictQuery', false);
