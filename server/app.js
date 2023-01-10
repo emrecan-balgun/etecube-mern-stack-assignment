@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const userRoute = require('./routes/userRoute.js');
 const pageRoute = require('./routes/pageRoute.js');
 const companyRoute = require('./routes/companyRoute.js');
+const productRoute = require('./routes/productRoute.js');
 
 const app = express();
 dotenv.config();
@@ -29,6 +30,7 @@ mongoose
 app.use('/', pageRoute);
 app.use('/users', userRoute);
 app.use('/companies', companyRoute);
+app.use('/products', productRoute);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

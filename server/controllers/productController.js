@@ -1,12 +1,11 @@
-const Company = require('../models/Company.js');
 const Product = require('../models/Product.js');
 
-exports.createCompany = async (req, res) => {
+exports.createProduct = async (req, res) => {
   try {
-    await Company.create(req.body);
+    await Product.create(req.body);
     res.status(201).json({
       succeeded: true,
-      message: 'Company created successfully',
+      message: 'Product created successfully',
     });
   } catch (error) {
     res.status(400).json({
@@ -16,13 +15,13 @@ exports.createCompany = async (req, res) => {
   }
 };
 
-exports.getAllCompanies = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
   try {
-    const companies = await Company.find();
+    const products = await Product.find().populate('company'); // populate the company field with the company data
     res.status(200).json({
       succeeded: true,
       data: {
-        companies,
+        products,
       },
     });
   } catch (error) {
@@ -33,13 +32,13 @@ exports.getAllCompanies = async (req, res) => {
   }
 };
 
-exports.getCompany = async (req, res) => {
+exports.getProduct = async (req, res) => {
   try {
-    const company = await Company.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('company'); // populate the company field with the company data
     res.status(200).json({
       succeeded: true,
       data: {
-        company,
+        product,
       },
     });
   } catch (error) {
@@ -50,12 +49,12 @@ exports.getCompany = async (req, res) => {
   }
 };
 
-exports.updateCompany = async (req, res) => {
+exports.updateProduct = async (req, res) => {
   try {
-    await Company.findByIdAndUpdate(req.params.id, req.body);
+    await Product.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
       succeeded: true,
-      message: 'Company updated successfully',
+      message: 'Product updated successfully',
     });
   } catch (error) {
     res.status(400).json({
@@ -65,13 +64,12 @@ exports.updateCompany = async (req, res) => {
   }
 };
 
-exports.deleteCompany = async (req, res) => {
+exports.deleteProduct = async (req, res) => {
   try {
-    await Company.findByIdAndDelete(req.params.id);
-    await Product.deleteMany({ company: req.params.id }); // Delete all products associated with the company
+    await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({
       succeeded: true,
-      message: 'Company and its products deleted successfully',
+      message: 'Product deleted successfully',
     });
   } catch (error) {
     res.status(400).json({
