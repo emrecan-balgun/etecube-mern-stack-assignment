@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -6,11 +7,6 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
   username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
     type: String,
     required: true,
     unique: true,
@@ -28,6 +24,21 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+UserSchema.pre('save', function (next) {
+  // why not use arrow function here? Because arrow function does not bind this keyword
+  const user = this;
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(10, function (err, salt) {
+    if (err) return next(err);
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
 });
 
 const User = mongoose.model('User', UserSchema);
