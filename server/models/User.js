@@ -29,7 +29,7 @@ const UserSchema = mongoose.Schema({
 UserSchema.pre('save', function (next) {
   // why not use arrow function here? Because arrow function does not bind this keyword
   const user = this;
-  if (!user.isModified('password')) return next();
+  if (!user.isModified('password')) return next(); // if password is not modified, then return next
 
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);

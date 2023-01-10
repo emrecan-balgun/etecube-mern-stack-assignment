@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const userRoute = require('./routes/userRoute.js');
+const pageRoute = require('./routes/pageRoute.js');
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ mongoose
   .then(() => console.log('Connected DB!'));
 
 // Routes
+app.use('/', pageRoute);
 app.use('/users', userRoute);
 
 app.listen(process.env.PORT || 5000, () => {
