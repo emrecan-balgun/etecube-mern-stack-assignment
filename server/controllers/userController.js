@@ -5,15 +5,15 @@ const User = require('../models/User.js');
 
 exports.register = async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    await User.create(req.body);
     res.status(201).json({
-      succeded: true,
-      user,
+      succeeded: true,
+      message: 'You have successfully registered',
     });
   } catch (error) {
     res.status(500).json({
-      succeded: false,
-      message: error,
+      succeeded: false,
+      message: 'Such a user is already registered',
     });
   }
 };
@@ -28,8 +28,8 @@ exports.login = async (req, res) => {
       same = await bcrypt.compare(password, user.password);
     } else {
       return res.status(401).json({
-        succeded: false,
-        message: 'User not found',
+        succeeded: false,
+        message: 'User not found!',
       });
     }
 
@@ -41,18 +41,19 @@ exports.login = async (req, res) => {
       });
 
       res.status(200).json({
-        succeded: true,
+        succeeded: true,
+        message: 'You have successfully logged in, redirecting...'
       });
     } else {
       res.status(401).json({
-        succeded: false,
-        message: 'Password are not match',
+        succeeded: false,
+        message: 'Password are not match!',
       });
     }
   } catch (error) {
     res.status(500).json({
-      succeded: false,
-      message: error,
+      succeeded: false,
+      message: 'Something went wrong',
     });
   }
 };
@@ -65,4 +66,4 @@ exports.createToken = (userID) => {
 
 exports.getDashboard = (res) => {
   res.status(200).redirect('/dashboard');
-}
+};

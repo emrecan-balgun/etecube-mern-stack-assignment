@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const userRoute = require('./routes/userRoute.js');
 const pageRoute = require('./routes/pageRoute.js');
@@ -15,6 +16,11 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // Mongoose Config
 mongoose.set('strictQuery', false);
