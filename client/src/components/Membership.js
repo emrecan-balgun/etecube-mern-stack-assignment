@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Image, Typography } from 'antd';
 
 import { changeShow } from '../store/etecube/etecubeSlice';
 import EtecubeLogo from '../assets/img/etecube-logo.png';
@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 
 function Membership() {
+  const { Title } = Typography;
   const dispatch = useDispatch();
   const showLogin = useSelector((state) => state.etecube.showLogin);
 
@@ -19,34 +20,26 @@ function Membership() {
   };
 
   return (
-    <div className="grid h-screen place-items-center bg-gradient-to-br from-[#ff966d] via-[#fa538d] to-[#89379c]">
-      <div
-        className="relative w-[800px] h-[400px] bg-white rounded-md"
-        style={{ boxShadow: '0 5px 20px rgba(0, 0, 0, .5)' }}
-      >
-        <div
-          className="absolute top-0 left-0 w-[300px] h-[400px] bg-gradient-to-r from-[#ff966d] to-[#fa538d] rounded-t-md rounded-b-md text-center transition z-[2]"
-          style={{ transition: '1s cubic-bezier(.95,.32,.37,1.31)' }}
-        >
-          <div className="flex flex-col items-center justify-center">
-            <img className="object-cover w-full" src={EtecubeLogo} />
-            <h2 className="tracking-tight text-white">ETECube</h2>
-            <Button
-              className="w-[150px] h-10 rounded-lg outline-none bg-transparent text-white visible cursor-pointer hover:!border-white hover:!text-white"
-              onClick={() => {
-                changePage();
-              }}
-            >
-              {option}
-            </Button>
-          </div>
+    <div className="h-screen">
+      <div className="h-full flex flex-col justify-center items-center md:flex-row bg-[url('/src/assets/img/banner-bg.png')]">
+        <div className="hidden md:flex w-full p-4 md:w-1/2 md:p-0 flex-col items-center justify-center">
+          <img src={EtecubeLogo} className="w-1/5 h-1/5" alt="etecube_logo" />
+          <Title className="!text-white tracking-tight" level={1}>
+            ETECube
+          </Title>
+          <Button
+            className="w-1/4 rounded-lg outline-none bg-transparent text-white visible cursor-pointer hover:!border-white hover:!text-white"
+            onClick={() => {
+              changePage();
+            }}
+          >
+            {option}
+          </Button>
         </div>
-
-        <div
-          className="absolute top-0 left-[300px] w-[500px] h-full text-center z-[1] opacity-100 visible"
-          style={{ transition: '1s cubic-bezier(.95, .32,.37,1.31)' }}
-        >
-          {showLogin ? <Login /> : <Register />}
+        <div className="w-full md:w-1/2 flex mt-4 md:mt-0 flex-col items-center justify-center">
+          <div className="w-1/2 mx-auto">
+            {showLogin ? <Login /> : <Register />}
+          </div>
         </div>
       </div>
     </div>

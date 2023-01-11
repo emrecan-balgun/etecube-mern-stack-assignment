@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Typography, Input, Button } from 'antd';
+import { useDispatch } from 'react-redux';
 
+import { changeShow } from '../store/etecube/etecubeSlice';
 import { registerUser } from '../services/auth';
 import {
   successRegisterNotify,
@@ -9,11 +11,18 @@ import {
 } from '../constants/toastify';
 
 function Register() {
+  const { Text } = Typography;
+
   const [form] = Form.useForm();
 
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const changePage = () => {
+    dispatch(changeShow());
+  };
 
   const registerPage = async () => {
     const data = { name, username, password };
@@ -40,60 +49,68 @@ function Register() {
   };
 
   return (
-    <div className="h-full flex justify-center items-center">
-      <Form
-        form={form}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: 'Please input your name!' }]}
-          onChange={(e) => setName(e.target.value)}
+    <>
+      <h1 className="text-2xl font-bold text-center text-white">Register</h1>
+      <div className="h-full w-full flex justify-center">
+        <Form
+          form={form}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-          onChange={(e) => setUsername(e.target.value)}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-          onChange={(e) => setPassword(e.target.value)}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            className="bg-gradient-to-br from-[#ff966d] to-[#fa538d] font-semibold h-10 rounded-lg text-white transition ease-in-out delay-150 hover:!text-white hover:!border-transparent"
-            htmlType="submit"
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: 'Please input your name!' }]}
+            onChange={(e) => setName(e.target.value)}
           >
-            Register
-          </Button>
-          <Button
-            className="font-semibold h-10 rounded-lg"
-            style={{ margin: '0 8px' }}
-            onClick={() => {
-              form.resetFields();
-            }}
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+            onChange={(e) => setUsername(e.target.value)}
           >
-            Clear
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+            onChange={(e) => setPassword(e.target.value)}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item className='block md:hidden'>
+            <Text className="text-white" onClick={() => {
+              changePage();
+            }}>Do you already have an account?</Text>
+          </Form.Item>
+
+          <Form.Item className="flex justify-center">
+            <Button
+              className="h-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 hover:!text-white hover:!border-transparent rounded-lg focus:outline-none focus:shadow-outline"
+              htmlType="submit"
+            >
+              Register
+            </Button>
+            <Button
+              className="font-semibold h-10 rounded-lg mt-3 md:mt-0 ml-0 md:ml-3"
+              onClick={() => {
+                form.resetFields();
+              }}
+            >
+              Clear
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </>
   );
 }
 
