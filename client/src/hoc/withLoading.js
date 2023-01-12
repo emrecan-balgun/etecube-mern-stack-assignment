@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Loading from "../components/Loading";
 
 const withLoading = (WrappedComponent) => {
