@@ -18,11 +18,15 @@ exports.createProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().populate('company'); // populate the company field with the company data
+    const totalProduct = await Product.countDocuments();
+    const recentProducts = await Product.find()
+      .sort({ createdAt: -1 })
+      .limit(3);
     res.status(200).json({
       succeeded: true,
-      data: {
-        products,
-      },
+      products,
+      totalProduct,
+      recentProducts,
     });
   } catch (error) {
     res.status(400).json({
@@ -37,9 +41,7 @@ exports.getProduct = async (req, res) => {
     const product = await Product.findById(req.params.id).populate('company'); // populate the company field with the company data
     res.status(200).json({
       succeeded: true,
-      data: {
-        product,
-      },
+      product,
     });
   } catch (error) {
     res.status(400).json({

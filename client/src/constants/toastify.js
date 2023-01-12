@@ -72,6 +72,42 @@ const errorDataNotify = () =>
     theme: 'light',
   });
 
+const successUpdateNotify = () =>
+  toast.success('Updated successfully!', {
+    position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnHover: false,
+    theme: 'light',
+  });
+
+const successDeleteNotify = () =>
+  toast.success('Deleted successfully!', {
+    position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnHover: false,
+    theme: 'light',
+  });
+
+const successCreateNotify = () =>
+  toast.success('Created successfully!', {
+    position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnHover: false,
+    theme: 'light',
+  });
+
 export {
   successLoginNotify,
   errorLoginNotify,
@@ -79,4 +115,7 @@ export {
   errorRegisterNotify,
   warningNotify,
   errorDataNotify,
+  successUpdateNotify,
+  successDeleteNotify,
+  successCreateNotify,
 };

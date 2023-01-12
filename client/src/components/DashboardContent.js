@@ -3,16 +3,38 @@ import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
 import EtecubeMenuLogo from '../assets/img/etecube-menu-logo.png';
 import { items } from '../constants/menu';
-import { NavLink } from 'react-router-dom';
 import Reports from '../pages/Reports';
+import User from '../pages/User';
+import Product from '../pages/Product';
+import Company from '../pages/Company';
 
 function DashboardContent() {
-  const { Content, Header, Sider } = Layout;
+  const { Content, Header, Footer, Sider } = Layout;
+  const [activePageName, setActivePageName] = useState('Home');
+  const [collapsed, setCollapsed] = useState(true);
 
-  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const onClick = (e) => {
+    setActivePageName(e.key);
+  };
+
+  const changePage = () => {
+    switch (activePageName) {
+      case 'Home':
+        return <Reports />;
+      case 'Company':
+        return <Company />;
+      case 'Product':
+        return <Product />;
+      case 'User':
+        return <User />;
+      default:
+        return <Reports />;
+    }
+  };
 
   return (
     <Layout
@@ -38,26 +60,11 @@ function DashboardContent() {
         </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['Home']}
           mode="inline"
-          // items={items}
-        >
-          <Menu.Item key="/dashboard">
-            <NavLink to="/dashboard" className="nav-text">
-              Dashboard
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item key="/dashboard1">
-            <NavLink to="/dashboard1" className="nav-text">
-              Tenants
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item key="/dashboard2">
-            <NavLink to="/dashboard2" className="nav-text">
-              Users
-            </NavLink>
-          </Menu.Item>
-        </Menu>
+          items={items}
+          onClick={onClick}
+        ></Menu>
       </Sider>
       <Layout className="site-layout">
         <Header
@@ -76,8 +83,7 @@ function DashboardContent() {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Charts</Breadcrumb.Item>
+            <Breadcrumb.Item>{activePageName}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
@@ -86,9 +92,12 @@ function DashboardContent() {
               background: colorBgContainer,
             }}
           >
-            <Reports />
+            {changePage(activePageName)}
           </div>
         </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Etecube ©2023 Created by Emrecan Balgun
+        </Footer>
       </Layout>
     </Layout>
   );

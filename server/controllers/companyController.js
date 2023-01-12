@@ -19,11 +19,15 @@ exports.createCompany = async (req, res) => {
 exports.getAllCompanies = async (req, res) => {
   try {
     const companies = await Company.find();
+    const totalCompany = await Company.countDocuments();
+    const recentCompanies = await Company.find()
+      .sort({ createdAt: -1 })
+      .limit(3);
     res.status(200).json({
       succeeded: true,
-      data: {
-        companies,
-      },
+      companies,
+      totalCompany,
+      recentCompanies,
     });
   } catch (error) {
     res.status(400).json({
@@ -38,9 +42,7 @@ exports.getCompany = async (req, res) => {
     const company = await Company.findById(req.params.id);
     res.status(200).json({
       succeeded: true,
-      data: {
-        company,
-      },
+      company,
     });
   } catch (error) {
     res.status(400).json({

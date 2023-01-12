@@ -42,7 +42,8 @@ exports.login = async (req, res) => {
 
       res.status(200).json({
         succeeded: true,
-        message: 'You have successfully logged in, redirecting...'
+        message: 'You have successfully logged in, redirecting...',
+        userToken: token,
       });
     } else {
       res.status(401).json({
@@ -66,4 +67,40 @@ exports.createToken = (userID) => {
 
 exports.getDashboard = (res) => {
   res.status(200).redirect('/dashboard');
+};
+
+exports.checkUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      return res.status(200).json({
+        succeeded: true,
+        message: 'You are authorized to access this page',
+      });
+    }
+    res.status(401).json({
+      succeeded: false,
+      message: 'You are not authorized to access this page',
+    });
+  } catch (error) {
+    res.status(500).json({
+      succeeded: false,
+      message: 'Something went wrong',
+    });
+  }
+};
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const totalUser = await User.countDocuments();
+    res.status(200).json({
+      succeeded: true,
+      totalUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succeeded: false,
+      message: 'Something went wrong',
+    });
+  }
 };
