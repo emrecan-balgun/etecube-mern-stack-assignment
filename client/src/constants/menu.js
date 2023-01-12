@@ -1,5 +1,5 @@
 import { MdCorporateFare, MdProductionQuantityLimits } from 'react-icons/md';
-import { AiOutlinePieChart, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlinePieChart, AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
 
 function getItem(label, key, icon, children) {
   return {
@@ -15,6 +15,7 @@ const items = [
   getItem('Company', 'Company', <MdCorporateFare />),
   getItem('Product', 'Product', <MdProductionQuantityLimits />),
   getItem('User', 'User', <AiOutlineUser />),
+  getItem('Logout', 'Logout', <AiOutlineLogout />),
 ];
 
 export { items };

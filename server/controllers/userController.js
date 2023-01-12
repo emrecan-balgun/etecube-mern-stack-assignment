@@ -90,12 +90,42 @@ exports.checkUser = async (req, res) => {
   }
 };
 
-exports.getAllUsers = async (req, res) => {
+exports.getTotalUsers = async (req, res) => {
   try {
     const totalUser = await User.countDocuments();
     res.status(200).json({
       succeeded: true,
       totalUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succeeded: false,
+      message: 'Something went wrong',
+    });
+  }
+};
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      succeeded: true,
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succeeded: false,
+      message: 'Something went wrong',
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      succeeded: true,
+      message: 'User deleted successfully',
     });
   } catch (error) {
     res.status(500).json({

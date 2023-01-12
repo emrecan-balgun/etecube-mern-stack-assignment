@@ -108,6 +108,21 @@ const successCreateNotify = () =>
     theme: 'light',
   });
 
+const successLogoutNotify = () =>
+  toast.success(
+    'You have logged out successfully, you are being redirected...',
+    {
+      position: 'top-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+      pauseOnHover: false,
+      theme: 'light',
+    }
+  );
+
 export {
   successLoginNotify,
   errorLoginNotify,
@@ -118,4 +133,5 @@ export {
   successUpdateNotify,
   successDeleteNotify,
   successCreateNotify,
+  successLogoutNotify,
 };

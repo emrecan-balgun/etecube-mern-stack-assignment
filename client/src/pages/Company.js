@@ -46,7 +46,7 @@ function Company({ setLoading, loading }) {
       setCompany(companyResponse.data.companies);
       setFilters(
         companyResponse.data.companies.map((item) => {
-          const key = item.country.split(' ')[0];
+          const key = item.country;
           return {
             text: key,
             value: key,
@@ -277,7 +277,7 @@ function Company({ setLoading, loading }) {
       title: 'Operations',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={() => showEditModal(record._id)}>Edit</a>
+          <Button type='link' onClick={() => showEditModal(record._id)}>Edit</Button>
           <Popconfirm
             title="Delete the company"
             description="Are you sure to delete this company?"
@@ -286,7 +286,7 @@ function Company({ setLoading, loading }) {
             okText="Yes"
             cancelText="No"
           >
-            <a href="#">Delete</a>
+            <Button type='link'>Delete</Button>
           </Popconfirm>
         </Space>
       ),

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import EtecubeMenuLogo from '../assets/img/etecube-menu-logo.png';
 import { items } from '../constants/menu';
@@ -7,30 +8,59 @@ import Reports from '../pages/Reports';
 import User from '../pages/User';
 import Product from '../pages/Product';
 import Company from '../pages/Company';
+import { logoutUser } from '../services/user';
+import { successLogoutNotify } from '../constants/toastify';
 
 function DashboardContent() {
   const { Content, Header, Footer, Sider } = Layout;
-  const [activePageName, setActivePageName] = useState('Home');
   const [collapsed, setCollapsed] = useState(true);
+  const navigate = useNavigate();
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const onClick = (e) => {
-    setActivePageName(e.key);
+    setActiveCategoryName(e.key);
+  };
+
+  const logout = () => {
+    logoutUser();
+    successLogoutNotify();
+    setTimeout(() => {
+      navigate('/');
+    }, 5500);
+  };
+
+  const [activeCategoryName, setActiveCategoryName] = useState('');
+
+  useEffect(() => {
+    if(localStorage.getItem('activeCategory') !== null) {
+      setActiveCategoryName(localStorage.getItem('activeCategory'));
+    }
+  }, []);
+
+  const activeCategory = (categoryName) => {
+    localStorage.setItem('activeCategory', categoryName);
   };
 
   const changePage = () => {
-    switch (activePageName) {
+    switch (activeCategoryName) {
       case 'Home':
+        activeCategory('Home');
         return <Reports />;
       case 'Company':
+        activeCategory('Company');
         return <Company />;
       case 'Product':
+        activeCategory('Product');
         return <Product />;
       case 'User':
+        activeCategory('User');
         return <User />;
+      case 'Logout':
+        logout();
+        break;
       default:
         return <Reports />;
     }
@@ -60,7 +90,7 @@ function DashboardContent() {
         </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={['Home']}
+          defaultSelectedKeys={[localStorage.getItem('activeCategory')]}
           mode="inline"
           items={items}
           onClick={onClick}
@@ -83,7 +113,7 @@ function DashboardContent() {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>{activePageName}</Breadcrumb.Item>
+            <Breadcrumb.Item>{activeCategoryName}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
@@ -92,7 +122,7 @@ function DashboardContent() {
               background: colorBgContainer,
             }}
           >
-            {changePage(activePageName)}
+            {changePage(activeCategoryName)}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

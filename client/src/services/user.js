@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AUTH_URL } from '../constants';
 
 const getTotalUser = async () => {
-  return await axios.get(`${AUTH_URL}`);
+  return await axios.get(`${AUTH_URL}/totalUsers`);
 };
 
 const getUser = () => {
@@ -18,4 +18,12 @@ const isRealUser = async (id) => {
   return await axios.get(`${AUTH_URL}/checkUser/${id}`);
 };
 
-export { getTotalUser, getUser, logoutUser, isRealUser };
+const getAllUsers = async () => {
+  return await axios.get(`${AUTH_URL}`);
+};
+
+const deleteUser = async (id) => {
+  return await axios.delete(`${AUTH_URL}/${id}`);
+};
+
+export { getTotalUser, getUser, logoutUser, isRealUser, getAllUsers, deleteUser };
