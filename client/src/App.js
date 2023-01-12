@@ -1,25 +1,25 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound';
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <Home />,
     },
     {
-      path: '/dashboard',
+      path: "/dashboard",
       element: <Dashboard />,
     },
     {
-      path: '*',
+      path: "*",
       element: <NotFound />,
     },
   ]);

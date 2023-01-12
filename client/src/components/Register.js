@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Form, Typography, Input, Button } from 'antd';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { Form, Typography, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
 
-import { changeShow } from '../store/etecube/etecubeSlice';
-import { registerUser } from '../services/auth';
+import { changeShow } from "../store/etecube/etecubeSlice";
+import { registerUser } from "../services/auth";
 import {
   successRegisterNotify,
   errorRegisterNotify,
   warningNotify,
-} from '../constants/toastify';
+} from "../constants/toastify";
 
 function Register() {
   const { Text } = Typography;
@@ -16,9 +16,9 @@ function Register() {
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const changePage = () => {
     dispatch(changeShow());
@@ -48,7 +48,7 @@ function Register() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       return register();
     }
@@ -68,7 +68,7 @@ function Register() {
           <Form.Item
             label="Name"
             name="name"
-            rules={[{ required: true, message: 'Please input your name!' }]}
+            rules={[{ required: true, message: "Please input your name!" }]}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           >
@@ -78,7 +78,7 @@ function Register() {
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: "Please input your username!" }]}
             onChange={(e) => setUsername(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           >
@@ -88,7 +88,7 @@ function Register() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           >

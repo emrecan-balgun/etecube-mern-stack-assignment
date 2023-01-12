@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Chart as ChartJS,
   BarElement,
@@ -6,9 +6,9 @@ import {
   LinearScale,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import Loading from './Loading';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import Loading from "./Loading";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -19,8 +19,8 @@ function ChartItem({ datas, loading }) {
       {
         label: datas.title,
         data: datas.data,
-        backgroundColor: 'aqua',
-        borderColor: 'black',
+        backgroundColor: "aqua",
+        borderColor: "black",
         borderWidth: 1,
       },
     ],

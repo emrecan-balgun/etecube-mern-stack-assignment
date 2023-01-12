@@ -1,20 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   showLogin: true,
-}
+};
 
 export const etecubeSlice = createSlice({
-  name: 'etecube',
+  name: "etecube",
   initialState,
   reducers: {
     changeShow: (state) => {
-        state.showLogin = !state.showLogin
-    }
+      state.showLogin = !state.showLogin;
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { changeShow } = etecubeSlice.actions
+export const { changeShow } = etecubeSlice.actions;
 
-export default etecubeSlice.reducer
+export default etecubeSlice.reducer;

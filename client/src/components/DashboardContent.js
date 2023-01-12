@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { useNavigate } from "react-router-dom";
 
-import EtecubeMenuLogo from '../assets/img/etecube-menu-logo.png';
-import { items } from '../constants/menu';
-import Reports from '../pages/Reports';
-import User from '../pages/User';
-import Product from '../pages/Product';
-import Company from '../pages/Company';
-import { logoutUser } from '../services/user';
-import { successLogoutNotify } from '../constants/toastify';
+import EtecubeMenuLogo from "../assets/img/etecube-menu-logo.png";
+import { items } from "../constants/menu";
+import Reports from "../pages/Reports";
+import User from "../pages/User";
+import Product from "../pages/Product";
+import Company from "../pages/Company";
+import { logoutUser } from "../services/user";
+import { successLogoutNotify } from "../constants/toastify";
 
 function DashboardContent() {
   const { Content, Header, Footer, Sider } = Layout;
@@ -28,37 +28,37 @@ function DashboardContent() {
     logoutUser();
     successLogoutNotify();
     setTimeout(() => {
-      navigate('/');
+      navigate("/");
     }, 5500);
   };
 
-  const [activeCategoryName, setActiveCategoryName] = useState('');
+  const [activeCategoryName, setActiveCategoryName] = useState("");
 
   useEffect(() => {
-    if(localStorage.getItem('activeCategory') !== null) {
-      setActiveCategoryName(localStorage.getItem('activeCategory'));
+    if (localStorage.getItem("activeCategory") !== null) {
+      setActiveCategoryName(localStorage.getItem("activeCategory"));
     }
   }, []);
 
   const activeCategory = (categoryName) => {
-    localStorage.setItem('activeCategory', categoryName);
+    localStorage.setItem("activeCategory", categoryName);
   };
 
   const changePage = () => {
     switch (activeCategoryName) {
-      case 'Home':
-        activeCategory('Home');
+      case "Home":
+        activeCategory("Home");
         return <Reports />;
-      case 'Company':
-        activeCategory('Company');
+      case "Company":
+        activeCategory("Company");
         return <Company />;
-      case 'Product':
-        activeCategory('Product');
+      case "Product":
+        activeCategory("Product");
         return <Product />;
-      case 'User':
-        activeCategory('User');
+      case "User":
+        activeCategory("User");
         return <User />;
-      case 'Logout':
+      case "Logout":
         logout();
         break;
       default:
@@ -69,7 +69,7 @@ function DashboardContent() {
   return (
     <Layout
       style={{
-        minHeight: '100vh',
+        minHeight: "100vh",
       }}
     >
       <Sider
@@ -90,7 +90,7 @@ function DashboardContent() {
         </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={[localStorage.getItem('activeCategory')]}
+          defaultSelectedKeys={[localStorage.getItem("activeCategory")]}
           mode="inline"
           items={items}
           onClick={onClick}
@@ -105,12 +105,12 @@ function DashboardContent() {
         />
         <Content
           style={{
-            margin: '0 16px',
+            margin: "0 16px",
           }}
         >
           <Breadcrumb
             style={{
-              margin: '16px 0',
+              margin: "16px 0",
             }}
           >
             <Breadcrumb.Item>{activeCategoryName}</Breadcrumb.Item>
@@ -125,7 +125,7 @@ function DashboardContent() {
             {changePage(activeCategoryName)}
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <Footer style={{ textAlign: "center" }}>
           Etecube ©2023 Created by Emrecan Balgun
         </Footer>
       </Layout>

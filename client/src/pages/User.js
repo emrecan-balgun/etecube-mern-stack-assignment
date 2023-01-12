@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Input, Space, Table, Modal, message, Popconfirm } from 'antd';
+import React, { useEffect, useState } from "react";
+import { Button, Input, Space, Table, Modal, message, Popconfirm } from "antd";
 
 import {
   errorDataNotify,
   successCreateNotify,
   successDeleteNotify,
-} from '../constants/toastify';
-import { getAllUsers, deleteUser } from '../services/user';
-import { registerUser } from '../services/auth';
-import withLoading from '../hoc/withLoading';
+} from "../constants/toastify";
+import { getAllUsers, deleteUser } from "../services/user";
+import { registerUser } from "../services/auth";
+import withLoading from "../hoc/withLoading";
 
 function User({ setLoading, loading }) {
   // Variables
@@ -18,9 +18,9 @@ function User({ setLoading, loading }) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
 
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   // Get data
   const fetchData = async () => {
@@ -56,7 +56,7 @@ function User({ setLoading, loading }) {
   };
 
   const handleAddModalCancel = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
     setIsAddModalOpen(false);
   };
 
@@ -67,31 +67,31 @@ function User({ setLoading, loading }) {
   };
 
   const cancelPopup = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
   };
 
   // Columns
   const columns = [
     {
-      key: '1',
-      title: 'Name',
-      dataIndex: 'name',
+      key: "1",
+      title: "Name",
+      dataIndex: "name",
       sorter: (a, b) => {
         return a.name > b.name;
       },
     },
     {
-      key: '2',
-      title: 'Username',
-      dataIndex: 'username',
+      key: "2",
+      title: "Username",
+      dataIndex: "username",
       sorter: (a, b) => {
         return a.name > b.name;
       },
-      responsive: ['md'],
+      responsive: ["md"],
     },
     {
-      key: '5',
-      title: 'Operations',
+      key: "5",
+      title: "Operations",
       render: (_, record) => (
         <Space size="middle">
           <Popconfirm
@@ -121,23 +121,23 @@ function User({ setLoading, loading }) {
       >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <b>Name:</b>{' '}
+            <b>Name:</b>{" "}
             <Input
               placeholder="Name"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Username:</b>{' '}
+            <b>Username:</b>{" "}
             <Input
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Password:</b>{' '}
+            <b>Password:</b>{" "}
             <Input
-              type='password'
+              type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -150,6 +150,7 @@ function User({ setLoading, loading }) {
       </Button>
       {/* Table - Start */}
       <Table
+        rowKey="_id"
         loading={loading}
         columns={columns}
         dataSource={user}

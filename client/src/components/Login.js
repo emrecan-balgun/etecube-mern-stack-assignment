@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Form, Typography, Input, Button } from 'antd';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Form, Typography, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
 
-import { changeShow } from '../store/etecube/etecubeSlice';
-import { loginUser } from '../services/auth';
+import { changeShow } from "../store/etecube/etecubeSlice";
+import { loginUser } from "../services/auth";
 import {
   successLoginNotify,
   errorLoginNotify,
   warningNotify,
-} from '../constants/toastify';
+} from "../constants/toastify";
 
 function Login() {
   const { Text } = Typography;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const changePage = () => {
     dispatch(changeShow());
@@ -30,7 +30,7 @@ function Login() {
       if (response.status === 200) {
         successLoginNotify(response.data.message);
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate("/dashboard");
         }, 5500);
       }
     } catch (error) {
@@ -47,7 +47,7 @@ function Login() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       return login();
     }
@@ -66,7 +66,7 @@ function Login() {
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: "Please input your username!" }]}
             onChange={(e) => setUsername(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           >
@@ -76,7 +76,7 @@ function Login() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           >

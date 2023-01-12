@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
-import { changeShow } from '../store/etecube/etecubeSlice';
-import EtecubeLogo from '../assets/img/etecube-logo.png';
-import Login from './Login';
-import Register from './Register';
-import { getUser } from '../services/user';
+import { changeShow } from "../store/etecube/etecubeSlice";
+import EtecubeLogo from "../assets/img/etecube-logo.png";
+import Login from "./Login";
+import Register from "./Register";
+import { getUser } from "../services/user";
 
 function Membership() {
   const { Title } = Typography;
@@ -15,10 +15,10 @@ function Membership() {
   const dispatch = useDispatch();
   const showLogin = useSelector((state) => state.etecube.showLogin);
 
-  const [option, setOption] = useState('Register');
+  const [option, setOption] = useState("Register");
 
   const changePage = () => {
-    setOption(option === 'Register' ? 'Login' : 'Register');
+    setOption(option === "Register" ? "Login" : "Register");
     dispatch(changeShow());
   };
 
@@ -26,7 +26,7 @@ function Membership() {
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   }, []);
 

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { errorDataNotify } from '../constants/toastify';
-import { getAllCompanies } from '../services/company';
-import { getAllProducts } from '../services/product';
-import { getTotalUser } from '../services/user';
-import ChartItem from '../components/ChartItem';
-import CompanyItem from '../components/CompanyItem';
-import ProductItem from '../components/ProductItem';
-import withLoading from '../hoc/withLoading';
+import { errorDataNotify } from "../constants/toastify";
+import { getAllCompanies } from "../services/company";
+import { getAllProducts } from "../services/product";
+import { getTotalUser } from "../services/user";
+import ChartItem from "../components/ChartItem";
+import CompanyItem from "../components/CompanyItem";
+import ProductItem from "../components/ProductItem";
+import withLoading from "../hoc/withLoading";
 
 function Reports({ setLoading, loading }) {
   const [totalUser, setTotalUser] = useState(0);
@@ -43,8 +43,8 @@ function Reports({ setLoading, loading }) {
     <div className="flex flex-col xl:flex-row gap-2">
       <ChartItem
         datas={{
-          title: 'Count of document',
-          labels: ['Company', 'Product', 'User'],
+          title: "Count of document",
+          labels: ["Company", "Product", "User"],
           data: [totalCompany, totalProduct, totalUser],
           options: {},
         }}
@@ -52,11 +52,11 @@ function Reports({ setLoading, loading }) {
       />
       <div className="flex flex-col lg:flex-row gap-2">
         <CompanyItem
-          datas={{ title: 'Recently added 3 companies', data: recentCompany }}
+          datas={{ title: "Recently added 3 companies", data: recentCompany }}
           loading={loading}
         />
         <ProductItem
-          datas={{ title: 'Recently added 3 products', data: recentProduct }}
+          datas={{ title: "Recently added 3 products", data: recentProduct }}
           loading={loading}
         />
       </div>

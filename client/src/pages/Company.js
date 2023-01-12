@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Modal, message, Popconfirm } from 'antd';
-import { useRef } from 'react';
-import Highlighter from 'react-highlight-words';
+import React, { useEffect, useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button, Input, Space, Table, Modal, message, Popconfirm } from "antd";
+import { useRef } from "react";
+import Highlighter from "react-highlight-words";
 
 import {
   errorDataNotify,
   successCreateNotify,
   successDeleteNotify,
   successUpdateNotify,
-} from '../constants/toastify';
+} from "../constants/toastify";
 import {
   getAllCompanies,
   getCompany,
   deleteCompany,
   updateCompany,
   createCompany,
-} from '../services/company';
-import withLoading from '../hoc/withLoading';
+} from "../services/company";
+import withLoading from "../hoc/withLoading";
 
 function Company({ setLoading, loading }) {
   // Variables
@@ -28,15 +28,15 @@ function Company({ setLoading, loading }) {
   const [filters, setFilters] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
-  const [companyId, setCompanyId] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [companyLegalNumber, setCompanyLegalNumber] = useState('');
-  const [country, setCountry] = useState('');
-  const [website, setWebsite] = useState('');
+  const [companyId, setCompanyId] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyLegalNumber, setCompanyLegalNumber] = useState("");
+  const [country, setCountry] = useState("");
+  const [website, setWebsite] = useState("");
 
   // Get data
   const fetchData = async () => {
@@ -94,7 +94,7 @@ function Company({ setLoading, loading }) {
   };
 
   const handleCancel = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
     setEditIsModalOpen(false);
   };
 
@@ -111,7 +111,7 @@ function Company({ setLoading, loading }) {
   };
 
   const handleAddModalCancel = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
     setIsAddModalOpen(false);
   };
 
@@ -122,7 +122,7 @@ function Company({ setLoading, loading }) {
   };
 
   const cancelPopup = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
   };
 
   // Search functions on table
@@ -134,7 +134,7 @@ function Company({ setLoading, loading }) {
 
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
 
   const getColumnSearchProps = (dataIndex) => ({
@@ -161,7 +161,7 @@ function Company({ setLoading, loading }) {
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
-            display: 'block',
+            display: "block",
           }}
         />
         <Space>
@@ -213,7 +213,7 @@ function Company({ setLoading, loading }) {
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#1890ff' : undefined,
+          color: filtered ? "#1890ff" : undefined,
         }}
       />
     ),
@@ -228,12 +228,12 @@ function Company({ setLoading, loading }) {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#ffc069',
+            backgroundColor: "#ffc069",
             padding: 0,
           }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
@@ -243,41 +243,43 @@ function Company({ setLoading, loading }) {
   // Columns
   const columns = [
     {
-      key: '1',
-      title: 'Company Name',
-      dataIndex: 'companyName',
+      key: "1",
+      title: "Company Name",
+      dataIndex: "companyName",
       sorter: (a, b) => {
         return a.companyName > b.companyName;
       },
     },
     {
-      key: '2',
-      title: 'Company Legal Number',
-      dataIndex: 'companyLegalNumber',
-      ...getColumnSearchProps('companyLegalNumber'),
-      responsive: ['md'],
+      key: "2",
+      title: "Company Legal Number",
+      dataIndex: "companyLegalNumber",
+      ...getColumnSearchProps("companyLegalNumber"),
+      responsive: ["md"],
     },
     {
-      key: '3',
-      title: 'Country',
-      dataIndex: 'country',
+      key: "3",
+      title: "Country",
+      dataIndex: "country",
       filters: filters,
       onFilter: (value, record) => record.country.startsWith(value),
-      responsive: ['md'],
+      responsive: ["md"],
     },
     {
-      key: '4',
-      title: 'Website',
-      dataIndex: 'website',
-      ...getColumnSearchProps('website'),
-      responsive: ['md'],
+      key: "4",
+      title: "Website",
+      dataIndex: "website",
+      ...getColumnSearchProps("website"),
+      responsive: ["md"],
     },
     {
-      key: '5',
-      title: 'Operations',
+      key: "5",
+      title: "Operations",
       render: (_, record) => (
         <Space size="middle">
-          <Button type='link' onClick={() => showEditModal(record._id)}>Edit</Button>
+          <Button type="link" onClick={() => showEditModal(record._id)}>
+            Edit
+          </Button>
           <Popconfirm
             title="Delete the company"
             description="Are you sure to delete this company?"
@@ -286,7 +288,7 @@ function Company({ setLoading, loading }) {
             okText="Yes"
             cancelText="No"
           >
-            <Button type='link'>Delete</Button>
+            <Button type="link">Delete</Button>
           </Popconfirm>
         </Space>
       ),
@@ -305,28 +307,28 @@ function Company({ setLoading, loading }) {
       >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <b>Company name:</b>{' '}
+            <b>Company name:</b>{" "}
             <Input
               placeholder="Company name"
               onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Company legal number:</b>{' '}
+            <b>Company legal number:</b>{" "}
             <Input
               placeholder="Company legal number"
               onChange={(e) => setCompanyLegalNumber(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Country:</b>{' '}
+            <b>Country:</b>{" "}
             <Input
               placeholder="Country"
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Website:</b>{' '}
+            <b>Website:</b>{" "}
             <Input
               placeholder="Website"
               onChange={(e) => setWebsite(e.target.value)}
@@ -345,7 +347,7 @@ function Company({ setLoading, loading }) {
       >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <b>Company name:</b>{' '}
+            <b>Company name:</b>{" "}
             <Input
               placeholder="Company name"
               value={companyName}
@@ -353,7 +355,7 @@ function Company({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Company legal number:</b>{' '}
+            <b>Company legal number:</b>{" "}
             <Input
               placeholder="Company legal number"
               value={companyLegalNumber}
@@ -361,7 +363,7 @@ function Company({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Country:</b>{' '}
+            <b>Country:</b>{" "}
             <Input
               placeholder="Country"
               value={country}
@@ -369,7 +371,7 @@ function Company({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Website:</b>{' '}
+            <b>Website:</b>{" "}
             <Input
               placeholder="Website"
               value={website}
@@ -384,6 +386,7 @@ function Company({ setLoading, loading }) {
       </Button>
       {/* Table - Start */}
       <Table
+        rowKey="_id"
         loading={loading}
         columns={columns}
         dataSource={company}

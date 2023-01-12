@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Membership from '../components/Membership';
+import Membership from "../components/Membership";
 
 function Home() {
   return (

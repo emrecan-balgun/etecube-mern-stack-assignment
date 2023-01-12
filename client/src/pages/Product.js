@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Modal, message, Popconfirm } from 'antd';
-import { useRef } from 'react';
-import Highlighter from 'react-highlight-words';
-import DropdownList from 'react-widgets/DropdownList';
-import 'react-widgets/styles.css';
+import React, { useEffect, useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button, Input, Space, Table, Modal, message, Popconfirm } from "antd";
+import { useRef } from "react";
+import Highlighter from "react-highlight-words";
+import DropdownList from "react-widgets/DropdownList";
+import "react-widgets/styles.css";
 
 import {
   errorDataNotify,
   successCreateNotify,
   successDeleteNotify,
   successUpdateNotify,
-} from '../constants/toastify';
+} from "../constants/toastify";
 import {
   getAllProducts,
   getProduct,
   deleteProduct,
   updateProduct,
   createProduct,
-} from '../services/product';
-import { getAllCompanies } from '../services/company';
-import withLoading from '../hoc/withLoading';
+} from "../services/product";
+import { getAllCompanies } from "../services/company";
+import withLoading from "../hoc/withLoading";
 
 function Product({ setLoading, loading }) {
   // Variables
@@ -31,17 +31,17 @@ function Product({ setLoading, loading }) {
   const [filters, setFilters] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
-  const [productId, setProductId] = useState('');
-  const [productName, setProductName] = useState('');
-  const [productCategory, setProductCategory] = useState('');
-  const [productQuantity, setProductQuantity] = useState('');
-  const [unitOfQuantity, setUnitOfQuantity] = useState('');
-  const [company, setCompany] = useState('');
-  const [companyId, setCompanyId] = useState('');
+  const [productId, setProductId] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+  const [productQuantity, setProductQuantity] = useState("");
+  const [unitOfQuantity, setUnitOfQuantity] = useState("");
+  const [company, setCompany] = useState("");
+  const [companyId, setCompanyId] = useState("");
 
   const [companies, setCompanies] = useState([]);
 
@@ -111,7 +111,7 @@ function Product({ setLoading, loading }) {
   };
 
   const handleCancel = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
     setEditIsModalOpen(false);
   };
 
@@ -139,7 +139,7 @@ function Product({ setLoading, loading }) {
   };
 
   const handleAddModalCancel = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
     setIsAddModalOpen(false);
   };
 
@@ -150,7 +150,7 @@ function Product({ setLoading, loading }) {
   };
 
   const cancelPopup = () => {
-    message.error('The operation was canceled');
+    message.error("The operation was canceled");
   };
 
   // Search functions on table
@@ -162,7 +162,7 @@ function Product({ setLoading, loading }) {
 
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
 
   const getColumnSearchProps = (dataIndex) => ({
@@ -189,7 +189,7 @@ function Product({ setLoading, loading }) {
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
-            display: 'block',
+            display: "block",
           }}
         />
         <Space>
@@ -241,7 +241,7 @@ function Product({ setLoading, loading }) {
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#1890ff' : undefined,
+          color: filtered ? "#1890ff" : undefined,
         }}
       />
     ),
@@ -256,12 +256,12 @@ function Product({ setLoading, loading }) {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#ffc069',
+            backgroundColor: "#ffc069",
             padding: 0,
           }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
@@ -271,41 +271,43 @@ function Product({ setLoading, loading }) {
   // Columns
   const columns = [
     {
-      key: '1',
-      title: 'Product Name',
-      dataIndex: 'productName',
+      key: "1",
+      title: "Product Name",
+      dataIndex: "productName",
       sorter: (a, b) => {
         return a.productName > b.productName;
       },
     },
     {
-      key: '2',
-      title: 'Product Category',
-      dataIndex: 'productCategory',
+      key: "2",
+      title: "Product Category",
+      dataIndex: "productCategory",
       filters: filters,
       onFilter: (value, record) => record.productCategory.startsWith(value),
-      responsive: ['md'],
+      responsive: ["md"],
     },
     {
-      key: '3',
-      title: 'Product Quantity',
-      dataIndex: 'productQuantity',
-      ...getColumnSearchProps('productQuantity'),
-      responsive: ['md'],
+      key: "3",
+      title: "Product Quantity",
+      dataIndex: "productQuantity",
+      ...getColumnSearchProps("productQuantity"),
+      responsive: ["md"],
     },
     {
-      key: '4',
-      title: 'Unit Of Quantity',
-      dataIndex: 'unitOfQuantity',
-      ...getColumnSearchProps('unitOfQuantity'),
-      responsive: ['md'],
+      key: "4",
+      title: "Unit Of Quantity",
+      dataIndex: "unitOfQuantity",
+      ...getColumnSearchProps("unitOfQuantity"),
+      responsive: ["md"],
     },
     {
-      key: '5',
-      title: 'Operations',
+      key: "5",
+      title: "Operations",
       render: (_, record) => (
         <Space size="middle">
-          <Button type='link' onClick={() => showEditModal(record._id)}>Edit</Button>
+          <Button type="link" onClick={() => showEditModal(record._id)}>
+            Edit
+          </Button>
           <Popconfirm
             title="Delete the product"
             description="Are you sure to delete this product?"
@@ -314,7 +316,7 @@ function Product({ setLoading, loading }) {
             okText="Yes"
             cancelText="No"
           >
-            <Button type='link'>Delete</Button>
+            <Button type="link">Delete</Button>
           </Popconfirm>
         </Space>
       ),
@@ -333,35 +335,35 @@ function Product({ setLoading, loading }) {
       >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <b>Product name:</b>{' '}
+            <b>Product name:</b>{" "}
             <Input
               placeholder="Product name"
               onChange={(e) => setProductName(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Product category:</b>{' '}
+            <b>Product category:</b>{" "}
             <Input
               placeholder="Product category"
               onChange={(e) => setProductCategory(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Product quantity:</b>{' '}
+            <b>Product quantity:</b>{" "}
             <Input
               placeholder="Product quantity"
               onChange={(e) => setProductQuantity(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Unit of quantity:</b>{' '}
+            <b>Unit of quantity:</b>{" "}
             <Input
               placeholder="Unit of quantity"
               onChange={(e) => setUnitOfQuantity(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Company:</b>{' '}
+            <b>Company:</b>{" "}
             <DropdownList
               data={companies}
               dataKey="id"
@@ -382,7 +384,7 @@ function Product({ setLoading, loading }) {
       >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <b>Product name:</b>{' '}
+            <b>Product name:</b>{" "}
             <Input
               placeholder="Product name"
               value={productName}
@@ -390,7 +392,7 @@ function Product({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Product category:</b>{' '}
+            <b>Product category:</b>{" "}
             <Input
               placeholder="Product category"
               value={productCategory}
@@ -398,7 +400,7 @@ function Product({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Product quantity:</b>{' '}
+            <b>Product quantity:</b>{" "}
             <Input
               placeholder="Product quantity"
               value={productQuantity}
@@ -406,7 +408,7 @@ function Product({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Unit of quantity:</b>{' '}
+            <b>Unit of quantity:</b>{" "}
             <Input
               placeholder="Unit of quantity"
               value={unitOfQuantity}
@@ -414,7 +416,7 @@ function Product({ setLoading, loading }) {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <b>Company:</b>{' '}
+            <b>Company:</b>{" "}
             <DropdownList
               data={companies}
               textField="companyName"
@@ -430,6 +432,7 @@ function Product({ setLoading, loading }) {
       </Button>
       {/* Table - Start */}
       <Table
+        rowKey="_id"
         loading={loading}
         columns={columns}
         dataSource={product}

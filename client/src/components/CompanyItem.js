@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Modal } from 'antd';
+import React, { useState } from "react";
+import { Card, Modal } from "antd";
 
-import Loading from './Loading';
-import { getCompany } from '../services/company';
-import { errorDataNotify } from '../constants/toastify';
+import Loading from "./Loading";
+import { getCompany } from "../services/company";
+import { errorDataNotify } from "../constants/toastify";
 
 function CompanyItem({ datas, loading }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,16 +45,16 @@ function CompanyItem({ datas, loading }) {
             onCancel={handleCancel}
           >
             <p>
-              <b>Company name:</b> {company['companyName']}
+              <b>Company name:</b> {company["companyName"]}
             </p>
             <p>
-              <b>Company legal number:</b> {company['companyLegalNumber']}
+              <b>Company legal number:</b> {company["companyLegalNumber"]}
             </p>
             <p>
-              <b>Country:</b> {company['country']}
+              <b>Country:</b> {company["country"]}
             </p>
             <p>
-              <b>Website:</b> {company['website']}
+              <b>Website:</b> {company["website"]}
             </p>
           </Modal>
           <Card title={datas.title} bordered={true} className="w-full">

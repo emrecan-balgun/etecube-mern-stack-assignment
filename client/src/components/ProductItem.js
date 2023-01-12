@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Modal } from 'antd';
+import React, { useState } from "react";
+import { Card, Modal } from "antd";
 
-import Loading from './Loading';
-import { getProduct } from '../services/product';
-import { errorDataNotify } from '../constants/toastify';
+import Loading from "./Loading";
+import { getProduct } from "../services/product";
+import { errorDataNotify } from "../constants/toastify";
 
 function ProductItem({ datas, loading }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,19 +47,19 @@ function ProductItem({ datas, loading }) {
             onCancel={handleCancel}
           >
             <p>
-              <b>Product name:</b> {product['productName']}
+              <b>Product name:</b> {product["productName"]}
             </p>
             <p>
-              <b>Product category:</b> {product['productCategory']}
+              <b>Product category:</b> {product["productCategory"]}
             </p>
             <p>
-              <b>Product quantity:</b> {product['productQuantity']}
+              <b>Product quantity:</b> {product["productQuantity"]}
             </p>
             <p>
-              <b>Unit of quantity:</b> {product['unitOfQuantity']}
+              <b>Unit of quantity:</b> {product["unitOfQuantity"]}
             </p>
             <p>
-              <b>Company:</b> {company['companyName']}
+              <b>Company:</b> {company["companyName"]}
             </p>
           </Modal>
           <Card title={datas.title} bordered={true} className="w-full">

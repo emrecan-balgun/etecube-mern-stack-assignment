@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { PRODUCT_URL } from '../constants';
+import { PRODUCT_URL } from "../constants";
 
 const getAllProducts = async () => {
   return await axios.get(PRODUCT_URL);

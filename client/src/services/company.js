@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { COMPANY_URL } from '../constants';
+import { COMPANY_URL } from "../constants";
 
 const getAllCompanies = async () => {
   return await axios.get(COMPANY_URL);
