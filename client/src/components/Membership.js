@@ -1,23 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Image, Typography } from 'antd';
+import { Button, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { changeShow } from '../store/etecube/etecubeSlice';
 import EtecubeLogo from '../assets/img/etecube-logo.png';
 import Login from './Login';
 import Register from './Register';
+import { getUser } from '../services/user';
 
 function Membership() {
   const { Title } = Typography;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const showLogin = useSelector((state) => state.etecube.showLogin);
 
-  const [option, setOption] = useState('Login');
+  const [option, setOption] = useState('Register');
 
   const changePage = () => {
-    setOption(option === 'Login' ? 'Register' : 'Login');
+    setOption(option === 'Register' ? 'Login' : 'Register');
     dispatch(changeShow());
   };
+
+  const user = getUser();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, []);
 
   return (
     <div className="h-screen">

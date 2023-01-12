@@ -7,7 +7,9 @@ const registerUser = async (data) => {
 };
 
 const loginUser = async (data) => {
-  return await axios.post(`${AUTH_URL}/login`, data);
+  const response = await axios.post(`${AUTH_URL}/login`, data);
+  localStorage.setItem('userToken', JSON.stringify(response.data.userToken));
+  return response;
 };
 
 export { registerUser, loginUser };

@@ -15,7 +15,6 @@ const successLoginNotify = (message) =>
 const errorLoginNotify = (message) =>
   toast.error(message, {
     position: 'top-right',
-    position: 'top-right',
     autoClose: 4000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -40,7 +39,6 @@ const successRegisterNotify = (message) =>
 const errorRegisterNotify = (message) =>
   toast.error(message, {
     position: 'top-right',
-    position: 'top-right',
     autoClose: 4000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -53,6 +51,17 @@ const errorRegisterNotify = (message) =>
 const warningNotify = () =>
   toast.warning('Please fill all the fields', {
     position: 'top-right',
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnHover: false,
+    theme: 'light',
+  });
+
+const errorDataNotify = () =>
+  toast.error('There was an error while receiving data!', {
     position: 'top-right',
     autoClose: 4000,
     hideProgressBar: false,
@@ -69,4 +78,5 @@ export {
   successRegisterNotify,
   errorRegisterNotify,
   warningNotify,
+  errorDataNotify,
 };

@@ -23,7 +23,7 @@ function Login() {
     dispatch(changeShow());
   };
 
-  const loginPage = async () => {
+  const login = async () => {
     const data = { username, password };
     try {
       const response = await loginUser(data);
@@ -39,11 +39,18 @@ function Login() {
   };
 
   const onFinish = () => {
-    loginPage();
+    login();
   };
 
   const onFinishFailed = () => {
     warningNotify();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      return login();
+    }
   };
 
   return (
@@ -59,8 +66,9 @@ function Login() {
           <Form.Item
             label="Username"
             name="username"
-            rules={[{ message: 'Please input your username!' }]}
+            rules={[{ required: true, message: 'Please input your username!' }]}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           >
             <Input />
           </Form.Item>
@@ -68,16 +76,22 @@ function Login() {
           <Form.Item
             label="Password"
             name="password"
-            rules={[{ message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'Please input your password!' }]}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item className='block md:hidden'>
-            <Text className="text-white" onClick={() => {
-              changePage();
-            }}>Don't have an account yet?</Text>
+          <Form.Item className="block md:hidden">
+            <Text
+              className="text-white"
+              onClick={() => {
+                changePage();
+              }}
+            >
+              Don't have an account yet?
+            </Text>
           </Form.Item>
 
           <Form.Item className="flex justify-center">

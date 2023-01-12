@@ -24,7 +24,7 @@ function Register() {
     dispatch(changeShow());
   };
 
-  const registerPage = async () => {
+  const register = async () => {
     const data = { name, username, password };
     try {
       const response = await registerUser(data);
@@ -35,17 +35,23 @@ function Register() {
         }, 5500);
       }
     } catch (error) {
-      console.log(error);
       errorRegisterNotify(error.response.data.message);
     }
   };
 
   const onFinish = () => {
-    registerPage();
+    register();
   };
 
   const onFinishFailed = () => {
     warningNotify();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      return register();
+    }
   };
 
   return (
@@ -64,6 +70,7 @@ function Register() {
             name="name"
             rules={[{ required: true, message: 'Please input your name!' }]}
             onChange={(e) => setName(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           >
             <Input />
           </Form.Item>
@@ -73,6 +80,7 @@ function Register() {
             name="username"
             rules={[{ required: true, message: 'Please input your username!' }]}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           >
             <Input />
           </Form.Item>
@@ -82,14 +90,20 @@ function Register() {
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item className='block md:hidden'>
-            <Text className="text-white" onClick={() => {
-              changePage();
-            }}>Do you already have an account?</Text>
+          <Form.Item className="block md:hidden">
+            <Text
+              className="text-white"
+              onClick={() => {
+                changePage();
+              }}
+            >
+              Do you already have an account?
+            </Text>
           </Form.Item>
 
           <Form.Item className="flex justify-center">
@@ -100,7 +114,7 @@ function Register() {
               Register
             </Button>
             <Button
-              className="font-semibold h-10 rounded-lg mt-3 md:mt-0 ml-0 md:ml-3"
+              className="font-semibold h-10 rounded-lg mt-3 md:mt-0 ml-3"
               onClick={() => {
                 form.resetFields();
               }}

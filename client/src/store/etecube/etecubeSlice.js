@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  showLogin: false,
+  showLogin: true,
 }
 
 export const etecubeSlice = createSlice({
