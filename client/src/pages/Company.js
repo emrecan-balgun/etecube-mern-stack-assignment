@@ -280,7 +280,7 @@ function Company({ setLoading, loading }) {
       key: "5",
       title: "Operations",
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="middle" className="flex flex-col md:flex-row">
           <Button type="link" onClick={() => showEditModal(record._id)}>
             Edit
           </Button>
