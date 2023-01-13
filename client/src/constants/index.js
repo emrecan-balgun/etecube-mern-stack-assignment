@@ -1,3 +1,3 @@
-export const COMPANY_URL = "http://localhost:8000/companies";
-export const PRODUCT_URL = "http://localhost:8000/products";
-export const AUTH_URL = "http://localhost:8000/users";
+export const COMPANY_URL = "http://etecube-assignment-server.onrender.com/companies";
+export const PRODUCT_URL = "http://etecube-assignment-server.onrender.com/products";
+export const AUTH_URL = "http://etecube-assignment-server.onrender.com/users";

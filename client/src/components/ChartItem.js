@@ -20,7 +20,7 @@ function ChartItem({ datas, loading }) {
       {
         label: datas.title,
         data: datas.data,
-        backgroundColor: "aqua",
+        backgroundColor: "rgba(0,33,64,255)",
         borderColor: "black",
         borderWidth: 1,
       },
