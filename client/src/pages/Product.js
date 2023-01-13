@@ -79,7 +79,6 @@ function Product({ setLoading, loading }) {
       setProductQuantity(response.data.product.productQuantity);
       setUnitOfQuantity(response.data.product.unitOfQuantity);
       setCompany(response.data.product.company.companyName);
-      // setCompanyId(response.data.product.company.company._id);
     } catch (error) {
       errorDataNotify();
     } finally {
@@ -91,6 +90,15 @@ function Product({ setLoading, loading }) {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Clear input fields
+  const clearInputFields = () => {
+    setProductName("");
+    setProductCategory("");
+    setProductQuantity("");
+    setUnitOfQuantity("");
+    setCompany("");
+  };
 
   // Edit Modal
   const showEditModal = async (id) => {
@@ -124,6 +132,7 @@ function Product({ setLoading, loading }) {
 
   // Add modal
   const showAddModal = () => {
+    clearInputFields();
     setIsAddModalOpen(true);
   };
 
@@ -133,7 +142,7 @@ function Product({ setLoading, loading }) {
       productCategory,
       productQuantity,
       unitOfQuantity,
-      company,
+      company: companyId,
     };
     await createProduct(data);
     successCreateNotify();
@@ -341,6 +350,7 @@ function Product({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Product name:</b>{" "}
             <Input
+              value={productName}
               placeholder="Product name"
               onChange={(e) => setProductName(e.target.value)}
             />
@@ -348,6 +358,7 @@ function Product({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Product category:</b>{" "}
             <Input
+              value={productCategory}
               placeholder="Product category"
               onChange={(e) => setProductCategory(e.target.value)}
             />
@@ -355,6 +366,7 @@ function Product({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Product quantity:</b>{" "}
             <Input
+              value={productQuantity}
               placeholder="Product quantity"
               onChange={(e) => setProductQuantity(e.target.value)}
             />
@@ -362,6 +374,7 @@ function Product({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Unit of quantity:</b>{" "}
             <Input
+              value={unitOfQuantity}
               placeholder="Unit of quantity"
               onChange={(e) => setUnitOfQuantity(e.target.value)}
             />
@@ -372,7 +385,8 @@ function Product({ setLoading, loading }) {
               data={companies}
               dataKey="id"
               textField="companyName"
-              onChange={(value) => setCompany(value._id)}
+              value={company}
+              onChange={(value) => handleChange(value)}
             />
           </div>
         </div>

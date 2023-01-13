@@ -54,7 +54,7 @@ function CompanyItem({ datas, loading }) {
               <b>Country:</b> {company["country"]}
             </p>
             <p>
-              <b>Website:</b> {company["website"]}
+              <b>Website:</b> <a href={`${company["website"]}`} target="_blank" rel="noopener noreferrer">{company["website"]}</a>
             </p>
           </Modal>
           <Card title={datas.title} bordered={true} className="w-full">

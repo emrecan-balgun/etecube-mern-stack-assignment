@@ -3,6 +3,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table, Modal, message, Popconfirm } from "antd";
 import { useRef } from "react";
 import Highlighter from "react-highlight-words";
+import ReactFlagsSelect from "react-flags-select";
+import { countries } from "country-data";
 
 import {
   errorDataNotify,
@@ -81,6 +83,20 @@ function Company({ setLoading, loading }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Set country
+  function changeCountry(code) {
+    setCountry(countries[code].name);
+  }
+
+  // Clear input fields
+  const clearInputFields = () => {
+    setCompanyId("");
+    setCompanyName("");
+    setCompanyLegalNumber("");
+    setCountry("");
+    setWebsite("");
+  };
+
   // Edit Modal
   const showEditModal = async (id) => {
     await getCompanyData(id);
@@ -102,6 +118,7 @@ function Company({ setLoading, loading }) {
 
   // Add modal
   const showAddModal = () => {
+    clearInputFields();
     setIsAddModalOpen(true);
   };
 
@@ -275,6 +292,11 @@ function Company({ setLoading, loading }) {
       dataIndex: "website",
       ...getColumnSearchProps("website"),
       responsive: ["md"],
+      render: (text, record) => (
+        <a href={record.website} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
     },
     {
       key: "5",
@@ -313,6 +335,7 @@ function Company({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Company name:</b>{" "}
             <Input
+              value={companyName}
               placeholder="Company name"
               onChange={(e) => setCompanyName(e.target.value)}
             />
@@ -320,20 +343,27 @@ function Company({ setLoading, loading }) {
           <div className="flex flex-col gap-1">
             <b>Company legal number:</b>{" "}
             <Input
+              value={companyLegalNumber}
               placeholder="Company legal number"
               onChange={(e) => setCompanyLegalNumber(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
             <b>Country:</b>{" "}
-            <Input
-              placeholder="Country"
-              onChange={(e) => setCountry(e.target.value)}
+            <ReactFlagsSelect
+              selected={country}
+              onSelect={(code) => changeCountry(code)}
+              placeholder={country}
+              showSelectedLabel={true}
+              showOptionLabel={true}
+              searchable={true}
+              searchPlaceholder="Search countries"
             />
           </div>
           <div className="flex flex-col gap-1">
             <b>Website:</b>{" "}
             <Input
+              value={website}
               placeholder="Website"
               onChange={(e) => setWebsite(e.target.value)}
             />
@@ -368,10 +398,14 @@ function Company({ setLoading, loading }) {
           </div>
           <div className="flex flex-col gap-1">
             <b>Country:</b>{" "}
-            <Input
-              placeholder="Country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
+            <ReactFlagsSelect
+              selected={country}
+              onSelect={(code) => changeCountry(code)}
+              placeholder={country}
+              showSelectedLabel={true}
+              showOptionLabel={true}
+              searchable={true}
+              searchPlaceholder="Search countries"
             />
           </div>
           <div className="flex flex-col gap-1">
