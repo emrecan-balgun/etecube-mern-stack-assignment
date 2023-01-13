@@ -28,6 +28,7 @@ function Membership() {
     if (user) {
       navigate("/dashboard");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

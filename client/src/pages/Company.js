@@ -78,6 +78,7 @@ function Company({ setLoading, loading }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Edit Modal
@@ -91,6 +92,7 @@ function Company({ setLoading, loading }) {
     await updateCompany(companyId, data);
     successUpdateNotify();
     setEditIsModalOpen(false);
+    await fetchData();
   };
 
   const handleCancel = () => {
@@ -108,6 +110,7 @@ function Company({ setLoading, loading }) {
     await createCompany(data);
     successCreateNotify();
     setIsAddModalOpen(false);
+    await fetchData();
   };
 
   const handleAddModalCancel = () => {
@@ -119,6 +122,7 @@ function Company({ setLoading, loading }) {
   const confirmPopup = async (id) => {
     await deleteCompany(id);
     successDeleteNotify();
+    await fetchData();
   };
 
   const cancelPopup = () => {

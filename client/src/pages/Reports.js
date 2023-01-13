@@ -37,6 +37,7 @@ function Reports({ setLoading, loading }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

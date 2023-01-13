@@ -37,6 +37,7 @@ function User({ setLoading, loading }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Add modal
@@ -53,6 +54,7 @@ function User({ setLoading, loading }) {
     await registerUser(data);
     successCreateNotify();
     setIsAddModalOpen(false);
+    await fetchData();
   };
 
   const handleAddModalCancel = () => {
@@ -64,6 +66,7 @@ function User({ setLoading, loading }) {
   const confirmPopup = async (id) => {
     await deleteUser(id);
     successDeleteNotify();
+    await fetchData();
   };
 
   const cancelPopup = () => {

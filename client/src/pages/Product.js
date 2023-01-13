@@ -4,7 +4,7 @@ import { Button, Input, Space, Table, Modal, message, Popconfirm } from "antd";
 import { useRef } from "react";
 import Highlighter from "react-highlight-words";
 import DropdownList from "react-widgets/DropdownList";
-import "react-widgets/styles.css";
+import "react-widgets/styles.css"; // 13 warnings
 
 import {
   errorDataNotify,
@@ -89,6 +89,7 @@ function Product({ setLoading, loading }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Edit Modal
@@ -108,6 +109,7 @@ function Product({ setLoading, loading }) {
     await updateProduct(productId, data);
     successUpdateNotify();
     setEditIsModalOpen(false);
+    await fetchData();
   };
 
   const handleCancel = () => {
@@ -136,6 +138,7 @@ function Product({ setLoading, loading }) {
     await createProduct(data);
     successCreateNotify();
     setIsAddModalOpen(false);
+    await fetchData();
   };
 
   const handleAddModalCancel = () => {
@@ -147,6 +150,7 @@ function Product({ setLoading, loading }) {
   const confirmPopup = async (id) => {
     await deleteProduct(id);
     successDeleteNotify();
+    await fetchData();
   };
 
   const cancelPopup = () => {
