@@ -1,5 +1,5 @@
 # Etecube Mern Stack Assignment
 
-Example user:
+Live: https://etecube-assigment-frontend.onrender.com
 
 username: test password: test
